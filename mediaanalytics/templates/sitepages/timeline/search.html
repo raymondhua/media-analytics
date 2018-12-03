@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}Timeline{% endblock %}
+{% block content %} 
+<div class="my-4 search">
+	<h1 class="my-4">Timeline</h1>
+	Select time series between two years below:<br>(Leave blank for a time series between 1975 and 2017)
+
+	<form action="{% url 'mediaanalytics:timeline' %}" method=post class=add-entry>
+		
+	<select name="year1" class="colwidthTwentyFive shadow">
+        <option value="">Select year</option>
+        {% for year in years %}
+        <option value="{{ year }}">{{ year }}</option>
+	    {% endfor %}
+    </select>
+
+    <select name="year2" class="colwidthTwentyFive shadow">
+        <option value="">Select another year</option>
+        {% for year in years %}
+        <option value="{{ year }}">{{ year }}</option>
+	    {% endfor %}
+    </select>
+	<p></p>
+	Search word for a time series:
+	<br>
+	<input type="text" name="word" class="colwidthFifty shadow" placeholder="You can also check for multiple words by seperating them by commas" required>
+	<p></p>
+    <input type="submit" class="button" value="Search" name="submitWord">
+	</form>
+</div>
+{% endblock %}

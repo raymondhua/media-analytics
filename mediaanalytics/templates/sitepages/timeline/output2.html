@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}Time series of words{% endblock %}
+{% load static %}
+{% block content %} 
+<div class="search">
+<h1 class="my-4">{{headerText|safe}}</h1>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="{% static 'js/graph.js'%}"></script>
+
+<div class="row">
+{% for word in words %}
+	<div class="col-lg-6 col-sm-6 portfolio-item">
+		<div class="card h-100">
+			<div class="card-body">
+				<h4 class="card-title">{{ word }}</h4>
+                <div id="card-{{word}}"></div>
+                <form action="{% url 'mediaanalytics:timeline'%}" method="post" target="_blank">
+                <input type="hidden" id="word" name="word" value="{{ word }}">
+                <input type="hidden" id="year1" name="year1" value="{{ year1 }}">
+                <input type="hidden" id="year2" name="year2" value="{{ year2 }}">
+                <input type="submit" class="button2" value="Open timeline in new window" />
+                </form>
+			</div>
+		</div>
+	</div>
+{% endfor %}
+<div class="row">
+
+<script>
+    var y1Input = "{{ year1 }}";
+    var y2Input = "{{ year2 }}";
+{% for word in words %}
+    var textInput = "{{ word }}";
+    var context = {word:textInput, yearFrom:y1Input, yearTo:y2Input};
+    $.post("{% url 'mediaanalytics:articlesAPI' %}", context, function(response) {
+        if (response.code == 1) {
+            var api = response.word;
+            drawGraph2(api, "#card-{{word}}");
+        } 
+        else 
+        {
+        }
+    });
+{% endfor %}
+</script>
+
+</div>
+
+</div>
+{% endblock %}

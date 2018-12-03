@@ -1,0 +1,11 @@
+Django
+requests
+mysqlclient
+djangorestframework
+pygments
+gensim
+nltk
+django-cors-headers
+pandas
+matplotlib
+scikit-learn

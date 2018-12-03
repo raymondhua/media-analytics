@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}Time series of {{word}}{% endblock %}
+{% load static %}
+{% block content %} 
+<div class="search">
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="{% static 'js/graph.js'%}"></script>
+
+<h1 class="my-4">{{headerText|safe}}</h1>
+
+<p>Hover over the dots for details of the word</p>
+<p id="p1">Loading...</p>
+
+<script>
+var textInput = "{{ word }}";
+var y1Input = "{{ year1 }}";
+var y2Input = "{{ year2 }}";
+var context = {word:textInput, yearFrom:y1Input, yearTo:y2Input};
+$.post("{% url 'mediaanalytics:articlesAPI' %}", context, function(response) {
+    if (response.code == 1) {
+        document.getElementById("p1").innerHTML = "";
+        var api = response.word;
+        d3.select("svg").remove();
+        drawGraph(api);
+    } 
+    else 
+    {
+        document.getElementById("p1").innerHTML = "API not found";
+    }
+});
+</script>
+</div>
+{% endblock %}

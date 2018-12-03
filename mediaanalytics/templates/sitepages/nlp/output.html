@@ -1,0 +1,234 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}NLP Results{% endblock %}
+{% block content %} 
+<script src="{% static 'js/nlp.js'%}"></script>
+
+<div class="row">
+    {% if year2 == None %}
+	<div class="col-lg-7 col-sm-6 portfolio-item">
+    {% else %}
+    <div class="col-lg-6 col-sm-6 portfolio-item">
+    {% endif %}
+		<div class="card h-100">
+		    <div class="card-body">
+                <h4 class="card-title">
+				<p>{{year1}}</p>
+			    </h4>
+                {% if not similarWord == None %}
+                <p></p>
+                <h5 id="similarWordsHeader1"></h5>
+                <table id="similarWordsTable1">
+                </table>
+                <script>
+                var context = {word: "{{similarWord}}", year: "{{year1}}" };
+                $.post("{% url 'mediaanalytics:getSimilarWords' %}", context, function(response) {
+                    document.getElementById("similarWordsHeader1").innerHTML = "Similar words to {{similarWord}}";
+                    var api = response.similarWords;
+                    var tableName = "similarWordsTable1";
+                    similarWords(api, tableName);
+                });
+                </script>
+                {% endif %}
+                {% if not similarity1 == None %}
+                <p></p>
+                <h5 id="similarityHeader1"></h5>
+                <table id="similarityTable1">
+                </table>
+                <script>
+                var context = {word1: "{{similarity1}}", word2: "{{similarity2}}", year: "{{year1}}" };
+                $.post("{% url 'mediaanalytics:getSimilarity' %}", context, function(response) {
+                    document.getElementById("similarityHeader1").innerHTML = "Similarity between {{similarity1}} and {{similarity2}}";
+                    var api = response.similarity;
+                    var tableName = "similarityTable1";
+                    similarity(api, tableName);
+                });
+                </script>
+                {% endif %}
+                {% if not tnse == None %}
+                <p></p>
+                <h5 id="tsneHeader1"></h5>
+                <canvas id="tsneCanvas1" width="500" height="500"></canvas>
+                <script>
+                var canvas = document.getElementById("tsneCanvas1");
+                var imageLink = "{% url 'mediaanalytics:getTSNE' year1 tnse %}";
+                loadTSNEImage(canvas, imageLink, "tsneHeader1", "TSNE for {{tnse}}");
+                </script>
+                {% endif %}
+                {% if not analogyX == None %}
+                <p></p>
+                <h5 id="analogyHeader1"></h5>
+                <table id="analogyTable1">
+                </table>
+                <script>
+                var context = {x: "{{analogyX}}", y: "{{analogyY}}", z: "{{analogyZ}}", year: "{{year1}}" };
+                $.post("{% url 'mediaanalytics:getAnalogies' %}", context, function(response) {
+                    document.getElementById("analogyHeader1").innerHTML = "Analogies";
+                    var api = response.similarWords;
+                    var tableName = "analogyTable1";
+                    analogy(api, tableName);
+                });
+                </script>
+                {% endif %}
+                {% if not oddOneOut == None %}
+                <p></p>
+                <h5 id="notMatchHeader1"></h5>
+                <table id="notMatchTable1">
+                </table>
+                <script>
+                var context = {word: "{{oddOneOut}}", year: "{{year1}}" };
+                $.post("{% url 'mediaanalytics:getNotMatch' %}", context, function(response) {
+                    document.getElementById("notMatchHeader1").innerHTML = "What word doesn't match from the rest";
+                    var api = response.notMatch;
+                    var tableName = "notMatchTable1";
+                    notMatch(api, tableName);
+                });
+                </script>
+                {% endif %}
+                {% if not ranking == None %}
+                <p></p>
+                <h5 id="rankingHeader1"></h5>
+                <table id="rankingTable1">
+                </table>
+                <script>
+                var context = {word: "{{ranking}}", year: "{{year1}}" };
+                $.post("{% url 'mediaanalytics:getSpecificWord' %}", context, function(response) {
+                    document.getElementById("rankingHeader1").innerHTML = "Details for {{ranking}}";
+                    var api = response.word;
+                    var tableName = "rankingTable1";
+                    specificWord(api, tableName);
+                });
+                </script>
+                {% endif %}
+                {% if not topWordsBreak == None %}
+                <p></p>
+                <h5 id="topWordsHeader1"></h5>
+                <table id="topWordsTable1">
+                </table>
+                <script>
+                $.get("{% url 'mediaanalytics:getTopWords' year1 topWordsBreak %}", function(response) {
+                    document.getElementById("topWordsHeader1").innerHTML = "Top {{topWordsBreak}} frequent words in {{year1}}";
+                    var api = response.topWords;
+                    var tableName = "topWordsTable1";
+                    topWords(api, tableName);
+                });
+                </script>
+                {% endif %}
+			</div>
+		</div>
+	</div>
+    {% if not year2 == None %}
+    <div class="col-lg-6 col-sm-6 portfolio-item">
+		<div class="card h-100">
+		    <div class="card-body">
+                <h4 class="card-title">
+				<p>{{year2}}</p>
+			    </h4>
+                {% if not similarWord == None %}
+                <p></p>
+                <h5 id="similarWordsHeader2"></h5>
+                <table id="similarWordsTable2">
+                </table>
+                <script>
+                var context = {word: "{{similarWord}}", year: "{{year2}}" };
+                $.post("{% url 'mediaanalytics:getSimilarWords' %}", context, function(response) {
+                    document.getElementById("similarWordsHeader2").innerHTML = "Similar words to {{similarWord}}";
+                    var api = response.similarWords;
+                    var tableName = "similarWordsTable2";
+                    similarWords(api, tableName);
+                });
+                </script>
+                {% endif %}
+                {% if not similarity2 == None %}
+                <p></p>
+                <h5 id="similarityHeader2"></h5>
+                <table id="similarityTable2">
+                </table>
+                <script>
+                var context = {word1: "{{similarity1}}", word2: "{{similarity2}}", year: "{{year2}}" };
+                $.post("{% url 'mediaanalytics:getSimilarity' %}", context, function(response) {
+                    document.getElementById("similarityHeader2").innerHTML = "Similarity between {{similarity1}} and {{similarity2}}";
+                    var api = response.similarity;
+                    var tableName = "similarityTable2";
+                    similarity(api, tableName);
+                });
+                </script>
+                {% endif %}
+                {% if not tnse == None %}
+                <p></p>
+                <h5 id="tsneHeader2"></h5>
+                <canvas id="tsneCanvas2" width="500" height="500"></canvas>
+                <script>
+                var canvas = document.getElementById("tsneCanvas2");
+                var imageLink = "{% url 'mediaanalytics:getTSNE' year2 tnse %}";
+                loadTSNEImage(canvas, imageLink, "tsneHeader2", "TSNE for {{tnse}}");
+                </script>
+                {% endif %}
+                {% if not analogyX == None %}
+                <p></p>
+                <h5 id="analogyHeader2"></h5>
+                <table id="analogyTable2">
+                </table>
+                <script>
+                var context = {x: "{{analogyX}}", y: "{{analogyY}}", z: "{{analogyZ}}", year: "{{year2}}" };
+                $.post("{% url 'mediaanalytics:getAnalogies' %}", context, function(response) {
+                    document.getElementById("analogyHeader2").innerHTML = "Analogies";
+                    var api = response.similarWords;
+                    var tableName = "analogyTable2";
+                    analogy(api, tableName);
+                });
+                </script>
+                {% endif %}
+                {% if not oddOneOut == None %}
+                <p></p>
+                <h5 id="notMatchHeader2"></h5>
+                <table id="notMatchTable2">
+                </table>
+                <script>
+                var context = {word: "{{oddOneOut}}", year: "{{year2}}" };
+                $.post("{% url 'mediaanalytics:getNotMatch' %}", context, function(response) {
+                    document.getElementById("notMatchHeader2").innerHTML = "What word doesn't match from the rest";
+                    var api = response.notMatch;
+                    var tableName = "notMatchTable2";
+                    notMatch(api, tableName);
+                });
+                </script>
+                {% endif %}
+                {% if not ranking == None %}
+                <p></p>
+                <h5 id="rankingHeader2"></h5>
+                <table id="rankingTable2">
+                </table>
+                <script>
+                var context = {word: "{{ranking}}", year: "{{year2}}" };
+                $.post("{% url 'mediaanalytics:getSpecificWord' %}", context, function(response) {
+                    document.getElementById("rankingHeader2").innerHTML = "Details for {{ranking}}";
+                    var api = response.word;
+                    var tableName = "rankingTable2";
+                    specificWord(api, tableName);
+                });
+                </script>
+                {% endif %}
+                {% if not topWordsBreak == None %}
+                <p></p>
+                <h5 id="topWordsHeader2"></h5>
+                <table id="topWordsTable2">
+                </table>
+                <script>
+                $.get("{% url 'mediaanalytics:getTopWords' year2 topWordsBreak %}", function(response) {
+                    document.getElementById("topWordsHeader2").innerHTML = "Top {{topWordsBreak}} frequent words in {{year2}}";
+                    var api = response.topWords;
+                    var tableName = "topWordsTable2";
+                    topWords(api, tableName);
+                });
+                </script>
+                {% endif %}
+			</div>
+		</div>
+	</div>
+    {% endif %}
+</div>
+
+{% include "sitepages/nlp/footer.html" %}
+
+{% endblock %}

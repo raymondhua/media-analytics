@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}{{ headerText }}{% endblock %}
+{% block content %} 
+{% if articles.count > 0 %}
+<h1 class="my-4">{{ headerText }}</h1>
+<div class="row">
+	{% for article in articles %}
+	<div class="col-lg-4 col-sm-6 portfolio-item">
+		<div class="card h-100">
+			<div class="card-body">
+				<p class="card-text">{{ article.date }}</p>
+				<h4 class="card-title">
+				<a class="textColor" href="{% url 'mediaanalytics:article' article.id %}">{{ article.title|slice:":100" }}</a>
+				</h4>
+				<p class="card-text">By {{ article.author }}</p>
+				<p class="card-text">{{ article.section }}</p>
+			</div>
+		</div>
+	</div>
+		{% endfor %}
+	</div>
+<p>{{ articles.count }} article(s) displayed<p>
+{% else %}
+<p>No articles found<p>
+{% endif %}
+{% endblock %}

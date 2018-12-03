@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}NLP{% endblock %}
+{% block content %} 
+<div class="my-4 search">
+    <h1>NLP</h1>
+	<form action="{% url 'mediaanalytics:nlp' %}" method=post class=add-entry>
+    {% if messages %}
+    {% for message in messages %}
+    <label{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</label><br>
+    {% endfor %}
+    {% endif %}
+    <select name="year1" class="colwidthTwentyFive shadow" required>
+        <option value="">Select year</option>
+        {% for year in years %}
+        <option value="{{ year }}">{{ year }}</option>
+	    {% endfor %}
+    </select>
+    <select name="year2" class="colwidthTwentyFive shadow">
+        <option value="">Select year to compare (optional)</option>
+        {% for year in years %}
+        <option value="{{ year }}">{{ year }}</option>
+	    {% endfor %}
+    </select>
+    <br>
+	<input type="text" class="colwidthTwentyFive shadow" name="similarWord" placeholder="Enter a word for similar words">
+    <br>
+    <input type="text" class="borderBox shadow" name="similarWord1" placeholder="Enter first word">
+    <input type="text" class="borderBox shadow" name="similarWord2" placeholder="Enter second word">
+    <br>
+    <input type="text" class="colwidth shadow" name="tnse" placeholder="Enter words for TSNE to visualise. Seperate words by comma">
+    <br>
+    <input type="text" class="borderBox shadow" name="analogy-x" placeholder="X"> <b>:</b>
+    <input type="text" class="borderBox shadow" name="analogy-y" placeholder="Y"> <b>::</b>
+    <input type="text" class="borderBox shadow" name="analogy-z" placeholder="Z"> <b>:</b>
+    <input type="text" class="borderBox shadow" disabled="" placeholder="?">
+    <br>
+    <input type="text" class="colwidth shadow" name="oddOneOut" placeholder="Enter words to find the odd one out. Separate words by comma">
+    <br>
+    <input type="text" class="colwidthRanking shadow" name="ranking" placeholder="Show ranking for specific words. Separate words by comma">
+    <br>
+    <input type="text" class="borderBox shadow" name="topWordsBreak" placeholder="Show top words">
+    <br>
+    <input type="submit" class="button" value="Search" name="submit">
+	</form>
+</div>
+
+{% include "sitepages/nlp/footer.html" %}
+
+{% endblock %}

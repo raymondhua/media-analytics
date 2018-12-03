@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %} 
+<div class="my-4 search">
+	<h1 class="my-4">Search articles</h1>
+	<form action="{% url 'mediaanalytics:output' %}" method=post class=add-entry>
+
+	<div class="row">
+		<div class="col-lg-6 col-sm-6 portfolio-item">
+			<div class="card card-block">
+				<div class="card-body">
+					<h4 class="card-title">
+						Search here
+			    	</h4>
+					<input type="text" name="articleText" class="colwidth shadow" placeholder="Leave blank for a result of all articles">
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-6 col-sm-6 portfolio-item">
+			<div class="card h-100">
+				<div class="card-body">
+					<h4 class="card-title">Advanced</h4>
+				<select name="year" class="colwidthThirty shadow">
+					<option value="">All years</option>
+					{% for year in years %}
+					<option value="{{ year }}">{{ year }}</option>
+					{% endfor %}
+				</select>
+				<select name="section" class="colwidthThirty shadow">
+					<option value="">All sections</option>
+					{% for section in sections %}
+					<option value="{{ section.section }}">{{ section.section }}</option>
+					{% endfor %}
+				</select>
+				<select name="author" class="colwidthThirty shadow">
+					<option value="">All authors</option>
+					{% for author in authors %}
+					<option value="{{ author.author }}">{{ author.author }}</option>
+					{% endfor %}
+				</select>
+				</div>
+				</div>
+			</div>
+		</div>
+    <input type="submit" class="button" value="Search" name="submitWord">
+	</form>
+</div>
+{% endblock %}

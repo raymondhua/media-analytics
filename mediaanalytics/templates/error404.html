@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block title %}Error 404{% endblock %}
+{% block content %}
+<div class="my-4">
+<h1>Error 404 - Page Not Found</h1>
+<p>What you were looking for is just not there.</p>
+<a href="{% url 'mediaanalytics:home' %}" class="button">Go home</a>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}About Media Analytics{% endblock %}
+{% block content %} 
+<h1 class="my-4"><a href="{% url 'mediaanalytics:home' %}">Media Analytics</a></h1>
+<p>A site that allows anyone to query a large corpus of journalistic data using natural language processing tools. The tool allows for tracking the frequency of word usage over time in the New York Times data corpus as well as querying of word vectors, vector representations of words that capture the semantic loadings of words as well as their semantic changes over time.</p>
+
+<h2 class="my-4"><a href="{% url 'mediaanalytics:timeline' %}">Timeline</a></h2>
+Compares the frequency of the word used between two years (e.g. if user selects 1975 to 2017, it would return a time series graph of frequencies for 1975, 1976, 1977...... 2017)
+
+<h2 class="my-4"><a href="{% url 'mediaanalytics:nlp' %}">NLP</a></h2>
+
+<h3>Most similar word</h3>
+<p>Which word from the given list doesn’t go with the others according to the selected model? This is computed by calculating the word furthest away from the mean word embedding of all input words. Example: the word out of place in the following list [breakfast, cereal, dinner, lunch] is cereal.</p>
+
+<h3>Similarity between two words</h3>
+<p>Computes the cosine similarity between the 2 input words using the word2vec model trained on the selected corpus.</p>
+
+<h3>TSNE visualisation</h3>
+<p>Word embeddings (aka word vectors) inhabit a high dimensional space, in the corpuses case, a 300 dimensional space. It is impossible for humans to visualize unassisted the geometrical structure of such a multidimensional data set. The t-SNE algorithm takes a set of points in a high dimensional space and tries to find a faithful representation of those points in a lower dimensional space, typically in the 2D plane. Its objective function tries to map each high dimensional vector into 2 or 3 dimensional representation such that with high probability, similar objects in the high dimensional space are modelled by nearby points in the low dimensional space and dissimilar objects are modelled by distant points.</p>
+
+<h3>Analogical reasoning</h3>
+<p>An important property of word embeddings is that the learned word representations capture meaningful syntactic and semantic regularities between words, such as for instance gender or verb tense, and that said regularities are consistent across the vector space. The regularities are observed as constant vector offsets between pairs of words sharing a particular relationship. This property permits the usage of analogical reasoning to answer questions such as “man is to woman as king is to…” by using vector algebra of the form: v_woman-v_man+v_king (where v_n stands for the vector representation of word n). In a properly trained word embedding model with a sufficient and relevant text corpus, the result of the previous vector algebra operation will be a vector whose closest neighbor is the vector for the word “queen”.</p>
+
+<h3>Odd one out</h3>
+<p>Which word from the given list doesn’t go with the others according to the selected model? This is computed by calculating the word furthest away from the mean word embedding of all input words. Example: the word out of place in the following list [breakfast, cereal, dinner, lunch] is cereal.</p>
+
+<h3>Show ranking of specific word</h3>
+<p>Rank of the word in the frequency ranking of the selected year.</p>
+
+<h3>Show top words</h3>
+<p>Retrieve the top-n most frequent words in the selected year.</p>
+
+<footer class="page-footer font-small blue">
+
+  <div class="footer-copyright text-center py-3">Website by Raymond Hua - <a href="http://raymondhua.github.io">raymondhua.github.io</a><br>
+  Data scraping by Fawaz Dinnunhan<br>
+  Client: David Rozado - <a href="http://drozardo.github.io">drozado.github.io</a><br>
+  </div>
+
+</footer>
+
+{% endblock %}

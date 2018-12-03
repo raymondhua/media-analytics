@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %} 
+<div class="my-4 article">
+	<p><h1>{{ article.title }}</h1></p>
+	<p><td>By {{ article.author }}</a></td></p>
+	<p><td>{{ article.date }} | {{ article.section }}</td></p>
+	<p><td>{{ article.text|safe }}</td></p>
+	<p><i>URL: <a href="{{ article.url }}">{{ article.url }}</a><i></p>
+</div>
+{% endblock %}
