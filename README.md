@@ -136,7 +136,7 @@ Live server is located at: https://media-analytics.op-bit.nz/
 ## Authors
 
 * **Raymond Hua** - *Initial work* 
-* **Fawaz Khan Dinnunhan** - *Initial work* 
+* **Fawaz Khan Dinnunhan** - *Handover* 
 
 
 ## Acknowledgments
