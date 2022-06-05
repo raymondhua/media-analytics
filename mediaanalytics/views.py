@@ -10,6 +10,7 @@ from .models import *
 from .api import *
 
 # View for displaying the home page
+@csrf_exempt
 def home(request):
     context = {}
     context["years"] = yearRange()

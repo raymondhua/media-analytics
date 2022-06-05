@@ -12,7 +12,7 @@ yearEnd = 2017
 def loadAllModels():
     models = {}
     # folder path hardcoded for the live server, if it doesn't run properly ask the Ops team
-    folderPath = "/home/gitlab-runner/builds/dfc94ecf/0/BIT/Project/Assisted-Technolgy/Media-Analytics/mediaanalytics/models"
+    folderPath = "/home/huara883/models"
     # If the operating system is a Windows machine, it would get the folder path of this repo and
     if os.name == 'nt':
         folderPath = os.path.dirname(os.path.abspath(__file__)) + "\models"
@@ -41,4 +41,4 @@ def loadTestModels():
 # modelsDict would load all models from 1975 to 2017
 # This will take some time to load because of how big they are and uses too much memory
 # If you want to run the test models with less memory usage replace loadAllModels with loadTestModels
-modelsDict = loadAllModels()
+modelsDict = loadTestModels()

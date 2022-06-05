@@ -18,11 +18,12 @@ from django.urls import include, path
 
 from mediaanalytics import errorViews
 from django.conf.urls import handler404, handler500
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('mediaanalytics.urls')),
     path('admin/', admin.site.urls),
 ]
-
 handler404 = errorViews.error404
 handler500 = errorViews.error500

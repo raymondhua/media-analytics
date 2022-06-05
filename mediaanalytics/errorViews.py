@@ -3,7 +3,7 @@ from django.shortcuts import render
 '''---Errors - Have DEBUG = on and ALLOWED_HOSTS=['*'] in settings.py---
 ---DON'T UNCOMMENT IT UNLESS IF YOU'RE DEPLOYING---'''
 
-def error404(request):
+def error404(request, exception):
     return render(request,'error404.html', status=404)
 
 def error500(request):

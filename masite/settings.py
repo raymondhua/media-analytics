@@ -23,9 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'xs^w^r+wbregzy&rm28uo19=f#=dvvz=)k5kmu$1l)p)3w=0v2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['10.25.100.81']
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
 
 if os.name == 'nt':
     DEBUG = True
@@ -102,9 +103,9 @@ else:
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mediaanalytics',
-        'USER': 'root',
+        'USER': 'mauser',
         'PASSWORD': 'HelloRay12', # ASK RAYMOND FOR PASSWORD
-        'HOST': '10.25.100.30',
+        'HOST': '0.0.0.0',
         'PORT': '3306',
         }
     }   
@@ -146,4 +147,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT= '/home/gitlab-runner/builds/dfc94ecf/0/BIT/Project/Assisted-Technolgy/Media-Analytics/static'
+STATIC_ROOT= '/home/huara883/maenv/media-analytics/mediaanalytics/static/'

@@ -14,18 +14,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import io
-
+import decimal
 
 def topWords(year, breakID):
     #Opens the model from the loadModels.py
     model = openModel(year)
-    wordVectors = model.wv.vocab
+    wordVectors = model.wv.index_to_key
+    print(wordVectors)
     # Gets the length of the model
     modelLength = len(wordVectors)
     wordDict = {}
     # Gets all the words from the model and stores in the dictionary
     for word in wordVectors:
-        wordDict[word] = wordVectors[word].count/modelLength
+        wordDict[word] = model.wv.get_vecattr(word, "count")/modelLength
     # Sorts the words by the least frequent words and reverses
     topWords = sorted(wordDict.items(), key=lambda kv: kv[1], reverse=True)
     # Sets the count as 1
@@ -122,11 +123,11 @@ def specificWord(year, wordString):
 def getWordInfo(year, word, wordDict):
     def appendData(year, word, rank, count, frequency):
         wordDict.append({
-        'year': year,
+        'year': int(year),
         'word': word,
-        'rank': rank,
-        'count': count,
-        'frequency': frequency
+        'rank': int(rank),
+        'count': int(count),
+        'frequency': decimal.Decimal(frequency)
     })
     model = openModel(year)
     # Sets the total word count to 0
@@ -134,23 +135,25 @@ def getWordInfo(year, word, wordDict):
     # Cleans the word and stores it into wordInput
     wordInput = cleanInput(word)
     # Adds all the word counts in the model
-    for w in model.wv.vocab:
-        totalWordCount += model.wv.vocab[w].count
+    for w in model.wv.index_to_key:
+        totalWordCount += model.wv.get_vecattr(w, "count")
     try:
         # Returns the word count in the model for that certain word
-        wordCount = model.wv.vocab[wordInput].count
+        wordCount = model.wv.get_vecattr(wordInput, "count")
         # Divides the word count by the total word count and divide it by 100
         wordFreq = (wordCount/totalWordCount) * 100
+        print(wordFreq)
         # Appends the data into 
         # data['word'] = list
         # year = year of the model
-        # model.wv.vocab[wordInput].index + 1 = ranking
+        # model.wv.key_to_index[wordInput] + 1 = ranking
         # wordCount = word count in the model for that certain word
         # wordFreq = Frequency of the word in the model
-        appendData(year, word, model.wv.vocab[wordInput].index + 1, wordCount, wordFreq)
+        appendData(year, word, model.wv.key_to_index[wordInput] + 1, wordCount, wordFreq)
     # If the try handling throws an error, it would return the ranking, count, and frequency to 0
     except:
         appendData(year, word, 0, 0, 0)
+    print(wordDict)
     return wordDict
 
 # Function that returns information of a specific word between two years
@@ -201,16 +204,15 @@ def makeTSNE(model, items):
         d = {}
         for item in items:
             try: 
-                d[item] = model.wv.vocab[item]
+                d[item] = model.wv.key_to_index[item]
             except:
                 print("Word not found")
         return d
 
     d = makeTSNEDict(items)
     vocab = list(d)
-
-    X = model[vocab]
-
+    print(d)
+    X = model.wv[vocab]
     tsne = TSNE(perplexity=5, n_components=2, learning_rate=5, init='pca',random_state=3, n_iter=150000)
 
     X_tsne = tsne.fit_transform(X)
