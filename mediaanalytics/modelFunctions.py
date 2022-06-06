@@ -20,7 +20,6 @@ def topWords(year, breakID):
     #Opens the model from the loadModels.py
     model = openModel(year)
     wordVectors = model.wv.index_to_key
-    print(wordVectors)
     # Gets the length of the model
     modelLength = len(wordVectors)
     wordDict = {}
@@ -34,7 +33,6 @@ def topWords(year, breakID):
     #
     data = {}
     data['topWords'] = []
-
     for x, y in topWords:
         if not x.isdigit():
             data['topWords'].append({'word': x, 'frequently': y})
@@ -127,7 +125,7 @@ def getWordInfo(year, word, wordDict):
         'word': word,
         'rank': int(rank),
         'count': int(count),
-        'frequency': decimal.Decimal(frequency)
+        'frequency': frequency
     })
     model = openModel(year)
     # Sets the total word count to 0
@@ -142,7 +140,6 @@ def getWordInfo(year, word, wordDict):
         wordCount = model.wv.get_vecattr(wordInput, "count")
         # Divides the word count by the total word count and divide it by 100
         wordFreq = (wordCount/totalWordCount) * 100
-        print(wordFreq)
         # Appends the data into 
         # data['word'] = list
         # year = year of the model
@@ -153,7 +150,6 @@ def getWordInfo(year, word, wordDict):
     # If the try handling throws an error, it would return the ranking, count, and frequency to 0
     except:
         appendData(year, word, 0, 0, 0)
-    print(wordDict)
     return wordDict
 
 # Function that returns information of a specific word between two years
@@ -208,13 +204,10 @@ def makeTSNE(model, items):
             except:
                 print("Word not found")
         return d
-
     d = makeTSNEDict(items)
     vocab = list(d)
-    print(d)
     X = model.wv[vocab]
     tsne = TSNE(perplexity=5, n_components=2, learning_rate=5, init='pca',random_state=3, n_iter=150000)
-
     X_tsne = tsne.fit_transform(X)
     df = pd.concat([pd.DataFrame(X_tsne), pd.Series(vocab)], axis=1)
     df.columns = ['x', 'y', 'word']

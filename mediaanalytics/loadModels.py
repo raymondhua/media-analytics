@@ -41,4 +41,4 @@ def loadTestModels():
 # modelsDict would load all models from 1975 to 2017
 # This will take some time to load because of how big they are and uses too much memory
 # If you want to run the test models with less memory usage replace loadAllModels with loadTestModels
-modelsDict = loadTestModels()
+modelsDict = loadAllModels()
