@@ -3,7 +3,7 @@
 A site that allows anyone to query a large corpus of journalistic data using natural language processing tools. 
 The tool allows for tracking the frequency of word usage over time in the New York Times data corpus as well as querying word vectors, vector representations of words that capture the semantic loadings of words as well as their semantic changes over time.
 
-More details about the project are [linked here](https://raymondhua.github.io/project/op-project)
+More details about the project are [linked here.](https://raymondhua.github.io/project/op-project)
 
 ## Getting Started
 
