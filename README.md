@@ -142,3 +142,11 @@ Live server is located at: https://media-analytics.op-bit.nz/
 ## Acknowledgments
 
 * Project is based from the NLP site by Tom Paine http://nlp.op-bit.nz
+
+## Preview
+https://raymondhua.github.io/images/projects/op-project/timeline/terrorism.png
+Frequency of word **terrorism** | Frequent words between 1990 to 2017
+:-------------------------:|:-------------------------:
+<img src="https://raymondhua.github.io/images/projects/op-project/timeline/terrorism.png" width="400"> | <img src="https://raymondhua.github.io/images/projects/op-project/timeline/words.png" width="400"> 
+NLP output between 1990 to 2017  | NLP output cont'd
+<img src="https://raymondhua.github.io/images/projects/op-project/nlp/output1.png" width="400"> | <img src="https://raymondhua.github.io/images/projects/op-project/nlp/output2.png" width="400"> 
