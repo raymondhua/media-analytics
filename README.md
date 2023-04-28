@@ -1,14 +1,16 @@
 # Media Analytics
 
 A site that allows anyone to query a large corpus of journalistic data using natural language processing tools. 
-The tool allows for tracking the frequency of word usage over time in the New York Times data corpus as well as querying of word vectors, vector representations of words that capture the semantic loadings of words as well as their semantic changes over time.
+The tool allows for tracking the frequency of word usage over time in the New York Times data corpus as well as querying word vectors, vector representations of words that capture the semantic loadings of words as well as their semantic changes over time.
+
+More details about the project are [linked here](https://raymondhua.github.io/project/op-project)
 
 ## Getting Started
 
 <ul>
     <li>Pull down the repo</li>
-    <li>Download python, this will include pip to allow you to download packages</li>
-    <li>Open command prompt and navigate to the root directory of the repo</li>
+    <li>Download Python, this will include pip to allow you to download packages</li>
+    <li>Open the command prompt and navigate to the root directory of the repo</li>
     <li>Run python manage.py runserver, leave this running in the background</li>
     <li>Open an internet browser and navigate to http://localhost:8000/</li>
 </ul>
@@ -144,7 +146,6 @@ Live server is located at: https://media-analytics.op-bit.nz/
 * Project is based from the NLP site by Tom Paine http://nlp.op-bit.nz
 
 ## Preview
-https://raymondhua.github.io/images/projects/op-project/timeline/terrorism.png
 Frequency of word **terrorism** | Frequent words between 1990 to 2017
 :-------------------------:|:-------------------------:
 <img src="https://raymondhua.github.io/images/projects/op-project/timeline/terrorism.png" width="400"> | <img src="https://raymondhua.github.io/images/projects/op-project/timeline/words.png" width="400"> 
